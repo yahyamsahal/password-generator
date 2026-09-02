@@ -10,7 +10,6 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blueviolet?style=flat-square" alt="Manifest V3" />
-  <img src="https://img.shields.io/badge/License-MIT-06B6D4?style=flat-square" alt="MIT License" />
   <img src="https://img.shields.io/badge/Version-1.0.0-8B5CF6?style=flat-square" alt="Version 1.0.0" />
   <img src="https://img.shields.io/badge/Chrome-Extension-22c55e?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome Extension" />
 </p>
