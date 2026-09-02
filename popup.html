@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyForge — Password Generator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L3 7V12C3 17.55 6.84 22.74 12 24C17.16 22.74 21 17.55 21 12V7L12 2Z" fill="url(#shieldGrad)" opacity="0.15"/>
+          <path d="M12 2L3 7V12C3 17.55 6.84 22.74 12 24C17.16 22.74 21 17.55 21 12V7L12 2Z" stroke="url(#shieldGrad)" stroke-width="1.5" fill="none"/>
+          <path d="M15.5 10.5C15.5 8.57 13.93 7 12 7C10.07 7 8.5 8.57 8.5 10.5C8.5 11.88 9.29 13.07 10.44 13.62L10 17H14L13.56 13.62C14.71 13.07 15.5 11.88 15.5 10.5Z" stroke="url(#shieldGrad)" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="10.5" r="1" fill="url(#shieldGrad)"/>
+          <defs>
+            <linearGradient id="shieldGrad" x1="3" y1="2" x2="21" y2="24">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">KeyForge</span>
+      </div>
+    </header>
+
+    <!-- Password Display -->
+    <section class="password-section">
+      <div class="password-display">
+        <span id="password-text" class="password-text">Click Generate</span>
+        <div class="password-actions">
+          <button id="copy-btn" class="icon-btn" title="Copy to clipboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+          </button>
+          <button id="refresh-btn" class="icon-btn" title="Regenerate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/>
+              <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Strength Bar -->
+      <div class="strength-bar-container">
+        <div id="strength-bar" class="strength-bar"></div>
+      </div>
+      <div class="strength-label">
+        <span id="strength-text">—</span>
+      </div>
+    </section>
+
+    <!-- Length Slider -->
+    <section class="control-section">
+      <div class="control-row">
+        <label class="control-label">Length</label>
+        <div class="length-input-group">
+          <input type="number" id="length-input" class="length-input" value="16" min="6" max="64">
+        </div>
+      </div>
+      <div class="slider-container">
+        <input type="range" id="length-slider" class="slider" min="6" max="64" value="16">
+        <div class="slider-labels">
+          <span>6</span>
+          <span>64</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Character Options -->
+    <section class="control-section">
+      <h3 class="section-title">Characters</h3>
+      <div class="toggle-grid">
+        <label class="toggle-item" for="opt-uppercase">
+          <div class="toggle-info">
+            <span class="toggle-label">Uppercase</span>
+            <span class="toggle-preview">A-Z</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-uppercase" checked>
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-lowercase">
+          <div class="toggle-info">
+            <span class="toggle-label">Lowercase</span>
+            <span class="toggle-preview">a-z</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-lowercase" checked>
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-numbers">
+          <div class="toggle-info">
+            <span class="toggle-label">Numbers</span>
+            <span class="toggle-preview">0-9</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-numbers" checked>
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-symbols">
+          <div class="toggle-info">
+            <span class="toggle-label">Symbols</span>
+            <span class="toggle-preview">!@#$%</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-symbols" checked>
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Exclusion Options -->
+    <section class="control-section">
+      <h3 class="section-title">Exclusions</h3>
+      <div class="toggle-grid">
+        <label class="toggle-item" for="opt-no-repeat">
+          <div class="toggle-info">
+            <span class="toggle-label">No Repeats</span>
+            <span class="toggle-preview">Each char once</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-no-repeat">
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-no-ambiguous">
+          <div class="toggle-info">
+            <span class="toggle-label">No Ambiguous</span>
+            <span class="toggle-preview">l 1 I O 0</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-no-ambiguous">
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-no-sequential">
+          <div class="toggle-info">
+            <span class="toggle-label">No Sequential</span>
+            <span class="toggle-preview">abc, 123</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-no-sequential">
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+        <label class="toggle-item" for="opt-begin-letter">
+          <div class="toggle-info">
+            <span class="toggle-label">Start with Letter</span>
+            <span class="toggle-preview">First char A-z</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="opt-begin-letter">
+            <span class="toggle-track"></span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Custom Exclusion -->
+    <section class="control-section">
+      <div class="control-row">
+        <label class="control-label" for="custom-exclude">Exclude Characters</label>
+      </div>
+      <input type="text" id="custom-exclude" class="text-input" placeholder='e.g.  { } [ ] ( ) / \ " ~ , ; : . < >'>
+    </section>
+
+    <!-- Generate Button -->
+    <button id="generate-btn" class="generate-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+      Generate Password
+    </button>
+
+    <!-- Copied Toast -->
+    <div id="toast" class="toast">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Copied!
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
