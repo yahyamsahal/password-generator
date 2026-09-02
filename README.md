@@ -161,12 +161,6 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
 <p align="center">
   Made by <a href="https://github.com/yahyamsahal">yahyamsahal</a>
 </p>
