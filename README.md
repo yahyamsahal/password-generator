@@ -168,5 +168,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 <p align="center">
-  Made with 💜 by <a href="https://github.com/yahyamsahal">yahyamsahal</a>
+  Made by <a href="https://github.com/yahyamsahal">yahyamsahal</a>
 </p>
